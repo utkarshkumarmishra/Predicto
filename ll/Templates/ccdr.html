@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicto</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" type="text/css" href="..\static\styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <!--Nav-->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="{{url_for('home') }}">Predicto</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                  
+                    <li class="nav-item dropdown dropright">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Services
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{url_for('lep') }}">Loan Eligiblity Prediction</a>
+                        <a class="dropdown-item" href="{{url_for('ccdr') }}">Credit Default Prediction</a>
+                        <a class="dropdown-item" href="#">Customer Value Prediction</a>
+                      </div>
+                    </li>
+              
+                    <li class="nav-item"><a class="nav-link" href="vision.html">Vision</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Masthead-->
+    <header class="masthead">
+        <div class="container-md  ">
+            <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+                <div class="col-lg-8 align-self-end">
+                    <h1 class="text-white font-weight-bold">Credit Card Default Prediction</h1>
+                    <hr class="divider" />
+                    <p class="text-white-75 mb-5">Will the customer will default?<br>Let's See. <br>Just enter the details...</p>
+                    <hr class="divider" />
+                    <br>
+                    <p class="text-white-75 mb-5">We do it with a machine learning model which predicts the risk of defaulting of a customer.This model uses various aspects like yearly debt payment ,age , type of job etc.</p>
+                    <br>
+                    <center><b><h2 style="color:#FF0000";>{{ prediction_text}}</h2></b></center> 
+                  <br>
+                  <br>     
+                 <form class="form-horizontal" action="{{ url_for('predictccdr')}}"method="post">
+             
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+   <!--Form-->
+   <div class="container main">
+    <div class="jumbotron" id="holder">
+      <br><br>
+      <form class="form-horizontal" action="{{ url_for('predictccdr')}}"method="post">
+  
+        <div class="form-group">
+          <div class="col-sm-10"><label> Age:</label> 
+            <input  class="form-control" type= "number" name="age" placeholder="0" required="required" />
+          </div>
+        </div> <br>  
+       
+        <div class="form-group">
+          <div class="col-sm-10"><label>  Gender:</label>
+            <select class="form-control" type="text"  name="gender" required="required">
+                  <option disabled selected value>Select...</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+            </select>
+          </div>
+        </div> <br> 
+        <div class="form-group">
+          <div class="col-sm-10">
+            <label> Owns Car:</label> 
+            <select class="form-control"  type="text"  name="owns_car"  required="required">
+                <option disabled selected value>Select...</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+            </select>
+          </div>
+        </div> <br> 
+        <div class="form-group">
+          <div class="col-sm-10">
+            <label> Owns House:</label> 
+            <select class="form-control"  type="text"  name="owns_house"  required="required">
+                <option disabled selected value>Select...</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+            </select>
+          </div>
+        </div> <br>
+        <div class="form-group">
+          <div class="col-sm-10">
+            <label> Number Of Children:</label> 
+            <select class="form-control"  type="number"  name="no_of_children"  required="required">
+                <option disabled selected value>Select...</option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">0</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  
+            </select>
+          </div>
+        </div> <br>
+        <div class="form-group">
+          <div class="col-sm-10"><label> Customer's Net Income:</label> 
+            <input  class="form-control" type= "text" name="net_yearly_income" placeholder="0" required="required" />
+          </div>
+        </div> <br>  
+  
+        <div class="form-group">
+          <div class="col-sm-10"><label> Number Of Months Employed (Till Now):</label> 
+            <input  class="form-control" type="text" name="no_of_days_employed" placeholder="0" required="required" />
+          </div>
+        </div> <br>  
+        
+        
+        <div class="form-group">
+          <div class="col-sm-10">
+            <label> Occupation Type:</label> 
+            <select class="form-control"  type="number"  name="occupation_type"  required="required">
+            <option disabled selected value>Select...</option>
+            <option value="0">Accountant</option>
+            <option value="4">Drivers</option>
+            <option value="8">Laborers</option>
+            <option value="9">Low Skilled Laborers</option>
+            <option value="10">Managers </option>
+            <option value="12">Real-Estate Agent</option>
+            <option value="6">HR staff </option>
+            <option value="7">IT staff</option>
+            <option value="5">Highskilled Tech-Staff   </option>
+            <option value="11">Private Sector Staff</option>
+            <option value="2">Cooking staff </option>
+            <option value="3">Core staff  </option>
+            <option value="13">Sales staff </option>
+            <option value="14">Secretaries </option>
+            <option value="15">Security Staff</option>
+            <option value="1">Cleaning Staff</option>
+            <option value="17">Waiter/Hostess/Ambience-Support Staff</option>
+            <option value="16">Others</option></select>
+            </div>
+        
+            </div> <br>  
+              
+         <div class="form-group">
+          <div class="col-sm-10">
+            <label> Number Of Family Members:</label> 
+            <select class="form-control"  type="number"  name="total_family_members"  required="required">
+                <option disabled selected value>Select...</option>
+                
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">0</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10 or more</option>
+            </select>
+          </div>
+         </div> <br>  
+  
+         <div class="form-group">
+          <div class="col-sm-10"><label>  Is the customer a migrant worker? :</label>
+            <select class="form-control" type="number" name="migrant_worker" required="required">
+                  <option disabled selected value>Select...</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+            </select>
+          </div>
+          </div> <br>  
+          <div class="form-group">
+          <div class="col-sm-10"><label> Yearly Debt Payment:</label> 
+            <input class="form-control" type="number" name="yearly_debt_payments" placeholder="0" required="required">
+         </div>
+        </div> <br> 
+        <div class="form-group">
+          <div class="col-sm-10"><label> Credit Limit:</label> 
+            <input class="form-control" type="number" name="credit_limit" placeholder="0" required="required">
+         </div>
+        </div> <br> 
+        <div class="form-group">
+          <div class="col-sm-10"><label> Credit Limit Used(%):</label> 
+            <input class="form-control" type="number" name="credit_limit_used(%)" placeholder="0" required="required">
+         </div>
+        </div> <br> 
+        <div class="form-group">
+          <div class="col-sm-10"><label> Credit Sxore:</label> 
+            <input class="form-control" type="number" name="credit_limit_used(%)" placeholder="0" required="required">
+         </div>
+        </div> <br> 
+        <div class="form-group">
+          <div class="col-sm-10"><label>  Previous Defaults? :</label>
+            <select class="form-control" type="number" name="prev_defaults" required="required">
+                  <option disabled selected value>Select...</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+            </select>
+          </div>
+        </div> <br>  
+        <div class="form-group">
+          <div class="col-sm-10"><label>  Defaults in Last 6 Months :</label>
+            <select class="form-control" type="number" name="prev_defaults" required="required">
+                  <option disabled selected value>Select...</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+            </select>
+          </div>
+        </div> <br>  
+        <div class="form-group">
+          <div class="col-sm-10"><label>  Credit Card Defaults? :</label>
+            <select class="form-control" type="number" name="prev_defaults" required="required">
+                  <option disabled selected value>Select...</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+            </select>
+          </div>
+        </div> <br>  
+        <div class="form-group">
+          <div class="col-sm-10"><label> No. of year employed:</label>
+            <select class="form-control" type="number" name="prev_defaults" required="required">
+                  <option disabled selected value>Select...</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+            </select>
+          </div>
+        </div> <br>  
+        
+
+       
+  
+        
+  
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+           <center><button type="submit" class="button-big">Predict</button><center/>
+          </div>
+        </div>
+      </form>
+    </div></div>
+<br>
+<!--Vision-->
+<section class="page-section bg-primary" id="vision">
+  <div class="container px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-lg-8 text-center">
+              <h2 class="text-white mt-0">We've got what you need!</h2>
+              <hr class="divider divider-light" />
+              <p class="text-white-75 mb-4" >We work with cutting edge technologies to give you best results.<br>In order to design our models<br> We test it with multiple algoritms and go for the one with best accuracy.It's to important to be so accurate in order to give the best predictions.  </p>
+            
+          </div>
+      </div>
+  </div>
+</section>
+<!-- Footer -->
+<footer class="bg-dark text-center text-white">
+    <!-- Grid container -->
+   
+     
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2022 Copyright:
+    <a class="text-white">Designed and Developed by Utkarsh Kumar</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->
+</body>
+</html>
